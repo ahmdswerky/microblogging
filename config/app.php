@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'passport_secret' => env('PASSPORT_SECRET', 'CQNg9px3hwRW4sTPiwdhB6tYfcbseVjYkSI5C3dW'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -81,6 +83,8 @@ return [
     */
 
     'locale' => 'en',
+
+    'locales' => ['en', 'ar'],
 
     /*
     |--------------------------------------------------------------------------
