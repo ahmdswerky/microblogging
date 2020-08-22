@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds',
-    'logout' => 'User logged out successfully',
+    'failed' => 'بيانات اعتماد الحساب لا تتطابق مع سجلاتنا',
+    'throttle' => 'محاولات تسجيل دخول كثيرة جدًا. يرجى المحاولة مرة أخرى في :seconds ثوانِ',
+    'logout' => 'تم تسجيل الخروج بنجاح',
 
 ];

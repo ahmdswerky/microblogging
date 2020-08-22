@@ -32,4 +32,19 @@ class User extends Authenticatable
             $this->attributes['password'] = bcrypt($value);
         }
     }
+
+    public function twitterAccount()
+    {
+        return $this->hasOne(TwitterAccount::class);
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->media('photo', 'image')->first();
+    }
+
+    public function getHasTwitterAttribute()
+    {
+        return (bool) $this->twitterAccount()->count();
+    }
 }

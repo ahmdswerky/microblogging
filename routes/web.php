@@ -3,10 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', HomeController::class.'@index')->name('home');
-});
+// Authentication Routes
+Auth::routes(['reset' => false, 'confirm' => false]);
 
+Route::get('/', HomeController::class.'@index')->middleware('auth')->name('home');
+
+// Localization
 Route::get('/lang/{locale}', LocaliztionController::class)->name('lang');
 
-Auth::routes(['reset' => false, 'confirm' => false]);
+// Socialite Routes
+Route::namespace('Website')->group(function () {
+    Route::get('auth/{provider}', AuthenticationController::class.'@redirectToProvider')->name('auth.social');
+    Route::get('auth/{provider}/callback', AuthenticationController::class.'@handleProviderCallback');
+});
+
