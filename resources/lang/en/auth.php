@@ -16,5 +16,9 @@ return [
     'failed' => 'These credentials do not match our records',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds',
     'logout' => 'User logged out successfully',
+    'account_required' => 'you need to connect with your :account account first',
 
+    'attributes' => [
+        'twitter' => 'twitter',
+    ],
 ];
