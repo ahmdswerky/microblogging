@@ -17,10 +17,10 @@
                     {{ __('front.welcome')  }} {{ auth()->user()->name }}
 
 
-                    <button class="btn btn-primary">
+                    <a href="{{ route('auth.social', 'twitter') }}" class="btn btn-primary">
                         <img src="{{ asset('assets/images/twitter-light.svg') }}" width="20" class="ml-1 mr-1" alt="twitter logo" />
                         {{ __('front.connect-twitter') }}
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
