@@ -94,26 +94,26 @@ Trait Mediable
             $path = $this->storeFile($path, $type);
         }
 
-        return Media::createFor([
+        return $this->media()->create([
             'path' => $path,
             'type' => $type,
-            'name' => am_get_value($additional, 'name'),
-            'title' => am_get_value($additional, 'title'),
-            'description' => am_get_value($additional, 'description'),
-            'notes' => am_get_value($additional, 'notes'),
-        ], $this);
+            'name' => array_key_exists('name', $additional) ? $additional['name'] : null,
+            'title' => array_key_exists('title', $additional) ? $additional['title'] : null,
+            'description' => array_key_exists('description', $additional) ? $additional['description'] : null,
+            'notes' => array_key_exists('notes', $additional) ? $additional['notes'] : null,
+        ]);
     }
 
     public function addMediaUrl($url, $type = 'photo', array $additional = [])
     {
-        return Media::createFor([
+        return $this->media()->create([
             'path' => $url,
             'type' => $type,
-            'name' => am_get_value($additional, 'name'),
-            'title' => am_get_value($additional, 'title'),
-            'description' => am_get_value($additional, 'description'),
-            'notes' => am_get_value($additional, 'notes'),
-        ], $this);
+            'name' => array_key_exists('name', $additional) ? $additional['name'] : null,
+            'title' => array_key_exists('title', $additional) ? $additional['title'] : null,
+            'description' => array_key_exists('description', $additional) ? $additional['description'] : null,
+            'notes' => array_key_exists('notes', $additional) ? $additional['notes'] : null,
+        ]);
     }
 
     public function updateMedia(Media $media, $path, array $additional = [])
@@ -127,10 +127,10 @@ Trait Mediable
         return tap($media, function () use ($media, $path, $additional) {
             $media->update([
                 'path' => $path,
-                'name' => am_get_value($additional, 'name'),
-                'title' => am_get_value($additional, 'title'),
-                'description' => am_get_value($additional, 'description'),
-                'notes' => am_get_value($additional, 'notes'),
+                'name' => array_key_exists('name', $additional) ? $additional['name'] : $media->name,
+                'title' => array_key_exists('title', $additional) ? $additional['title'] : $media->title,
+                'description' => array_key_exists('description', $additional) ? $additional['description'] : $media->description,
+                'notes' => array_key_exists('notes', $additional) ? $additional['notes'] : $media->notes,
             ]);
         });
     }
@@ -146,7 +146,7 @@ Trait Mediable
 
     protected function storeFile(UploadedFile $requestFile, string $type)
     {
-        $type   = Str::plural( strtolower($type) );
+        $type = Str::plural( strtolower($type) );
         $typeDirectory = $type . "DirectoryMedia";
 
         return $requestFile->storeAs(
