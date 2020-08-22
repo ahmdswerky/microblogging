@@ -10,4 +10,7 @@ Route::namespace('Website')->group(function () {
 Route::namespace('Website')->middleware('auth:api')->group(function () {
     Route::get('user', UserProfileController::class);
     Route::delete('logout', AuthenticationController::class."@logout");
+
+    Route::apiResource('tweets', TweetController::class)->middleware('account.twitter')->except('update');
+    Route::post('social/{provider}/follow/{username}', FollowController::class."@store");
 });

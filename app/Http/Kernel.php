@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'localization' => \App\Http\Middleware\Localization::class,
+        'account.twitter' => \App\Http\Middleware\TwitterAccountMiddleware::class,
     ];
 }
