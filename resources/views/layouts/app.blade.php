@@ -58,7 +58,7 @@
                             @endif
                         @else
                             <li class="nav-item d-flex align-items-center">
-                                <a class="nav-link btn btn-danger py-1 px-3 text-white" href="{{ route('logout') }}"
+                                <a class="nav-link btn btn-danger-opacity btn-sm py-1 px-3 text-white" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('front.buttons.logout') }}
@@ -73,6 +73,18 @@
                 </div>
             </div>
         </nav>
+
+        @foreach (['success', 'danger'] as $variant)
+            @if (session($variant))
+                <div class="alert text-{{ $variant }} bg-{{ $variant }}-opacity" role="alert">
+                    <div class="container">
+                        <img src='{{ asset("assets/images/alert-{$variant}.svg") }}' width="18" alt="alert mark">
+                        <span class="px-1"></span>
+                        <strong>{{ session($variant) }}</strong>
+                    </div>
+                </div>
+            @endif
+        @endforeach
 
         <main class="py-4">
             @yield('content')

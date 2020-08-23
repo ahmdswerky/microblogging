@@ -60,6 +60,7 @@ class AuthenticationController extends Controller
             ]);
         }
 
+        // Create or update user data like in App\Models\TwitterAccount
         (new MicrobloggingService($provider))->createOrUpdateUserAccount($user, [
             'account_id' => $social->getId(),
             'username' => $social->getNickname(),
@@ -67,14 +68,8 @@ class AuthenticationController extends Controller
             'access_token_secret' => $social->tokenSecret,
         ]);
 
-        return response([
-            // 'user' => new UserResource($user),
-            'twitter_account' => $user->twitterAccount,
-            'token' => $social->token,
-            'token_secret' => $social->tokenSecret,
-            'social' => $social,
-            'user' => $user,
-        ]);
+        return redirect()->route('home')
+                ->withSuccess(__('front.statuses.social_connected'));
     }
 
     protected function getUser($social)

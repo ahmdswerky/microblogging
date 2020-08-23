@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4',
-            'image' => 'sometimes|'
+            'image' => 'sometimes|mimes:jpeg,png',
         ];
     }
 
@@ -63,7 +63,7 @@ class RegisterRequest extends FormRequest
     {
         if ( $this->has('image') ) {
             $this->user->addMedia($this->image, 'photo', [
-                'name' => 'image'
+                'name' => 'image',
             ]);
         }
     }

@@ -1,1 +1,13 @@
-//
+.bg-success-opacity {
+    background-color: rgba(#38c172, 0.2);
+}
+
+.bg-danger-opacity {
+    background-color: rgba(#c82333, 0.2);
+}
+
+.btn-danger-opacity {
+    background-color: rgba(#c82333, 0.2);
+    border-color: rgba(#c82333, 0);
+    color: #c82333 !important;
+}
