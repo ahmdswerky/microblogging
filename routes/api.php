@@ -12,5 +12,5 @@ Route::namespace('Website')->middleware('auth:api')->group(function () {
     Route::delete('logout', AuthenticationController::class."@logout");
 
     Route::apiResource('tweets', TweetController::class)->middleware('account.twitter')->except('update');
-    Route::post('social/{provider}/follow/{username}', FollowController::class."@store");
+    Route::post('social/{provider}/follow/{username}', FollowController::class."@store")->middleware('account.twitter');
 });

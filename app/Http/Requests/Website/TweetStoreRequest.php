@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Website;
 
-use App\Services\MicrobloggingService;
+use App\Facades\Twitter;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TweetStoreRequest extends FormRequest
@@ -31,8 +31,6 @@ class TweetStoreRequest extends FormRequest
 
     public function storeTweet()
     {
-        return (new MicrobloggingService('twitter'))
-                        ->account($this->user('api'))
-                        ->publish($this->only('status'));
+        return Twitter::publish($this->only('status'));
     }
 }

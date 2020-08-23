@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Facades\Twitter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\MicrobloggingService;
 use App\Http\Resources\Website\TweetResource;
 use App\Http\Requests\Website\TweetStoreRequest;
 
@@ -17,9 +17,7 @@ class TweetController extends Controller
      */
     public function index(Request $request)
     {
-        $tweets = (new MicrobloggingService('twitter'))
-                        ->account($request->user('api'))
-                        ->timeline($request->query());
+        $tweets = Twitter::timeline($request->query());
 
         return TweetResource::collection($tweets);
     }
@@ -46,11 +44,9 @@ class TweetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $tweet = (new MicrobloggingService('twitter'))
-                        ->account($request->user('api'))
-                        ->show($id);
+        $tweet = Twitter::show($id);
 
         return response([
             'tweet' => new TweetResource($tweet),
@@ -63,11 +59,9 @@ class TweetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        (new MicrobloggingService('twitter'))
-            ->account($request->user('api'))
-            ->delete($id);
+        Twitter::delete($id);
 
         return response([
             'message' => __('services.tweets.destroy'),

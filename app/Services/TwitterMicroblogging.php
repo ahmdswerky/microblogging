@@ -13,12 +13,25 @@ class TwitterMicroblogging implements MicrobloggingInterface
 {
     public $account;
 
+    public function __construct()
+    {
+        if ( auth('api')->check() ) {
+            $this->account(auth('api')->user());
+        }
+
+        if ( auth()->check() ) {
+            $this->account(auth()->user());
+        }
+    }
+
     public function account($account)
     {
         $this->setAccount($account);
 
-        Config::set('ttwitter.ACCESS_TOKEN', $this->account->access_token);
-        Config::set('ttwitter.ACCESS_TOKEN_SECRET', $this->account->access_token_secret);
+        if ( $this->account ) {
+            Config::set('ttwitter.ACCESS_TOKEN', $this->account->access_token);
+            Config::set('ttwitter.ACCESS_TOKEN_SECRET', $this->account->access_token_secret);
+        }
     }
 
     public function createOrUpdateUserAccount(User $user, array $data)
@@ -41,10 +54,6 @@ class TwitterMicroblogging implements MicrobloggingInterface
             $this->account = $account->twitterAccount;
         } else {
             $this->account = TwitterAccount::where('account_id', $account)->first();
-        }
-
-        if ( is_null($this->account) ) {
-            throw new \Exception('Account doesn\'t exist');
         }
     }
 
