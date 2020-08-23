@@ -35,6 +35,16 @@ The website has 2 aspects:
 
 ## API Docs
 
+**NOTE:**
+<br/>
+Localization is applied to API through a header ex:
+<br/>
+**X-locale**: *en*
+<br/>
+**X-locale**: *ar*
+
+*supported languages now are English, Arabic only.*
+
 an API documentation with examples on the provided link below
 
 [Microblogging API Postman Collection](https://documenter.getpostman.com/view/5216161/T1LV8PVB?version=latest)
